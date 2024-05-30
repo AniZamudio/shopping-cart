@@ -1,3 +1,10 @@
-.btn-car {
+.cart {
+  display: flex;
+  flex-direction: row-reverse;
+  cursor: pointer;
+}
 
+.cart >p {
+  color: red;
+  margin: 0 0.5rem;
 }

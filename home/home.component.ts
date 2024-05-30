@@ -9,7 +9,7 @@ export interface Product {
   name: string;
   price: number;
   img: string;
-  quantity?: number;
+  quantity: number;
 }
 
 @Component({
@@ -23,7 +23,7 @@ export interface Product {
 
 export class HomeComponent {
   products: any = [];
-  countProducts: any[] = [];
+  countProducts: number = 0;
   searchTerm: string = '';
   filteredProducts: Product[] = [];
 
@@ -37,8 +37,28 @@ export class HomeComponent {
   }
 
   addToCart(product: Product): void {
-    //TODO Hacer contador para que aumente o el número de productos y realizar el FetchData para llevarlo al componente home-shopping
+    this.filteredProducts.forEach((item: Product) => {
+      if (item.id === product.id){
+        item.quantity++;
+        this.countProducts++;
+      }
+    })
+    //TODO Realizar el FetchData para llevarlo al componente home-shopping
 
+  }
+
+  removeToCart(product: Product): void {
+    this.filteredProducts.forEach((item: Product) => {
+      if (item.id === product.id && item.quantity > 0){
+        item.quantity--;
+        this.countProducts--;
+      }
+    })
+    //TODO Realizar el FetchData para llevarlo al componente home-shopping
+  }
+
+  getProductsSelected(){
+    return this.filteredProducts;
   }
 
   goToCart(): void {
